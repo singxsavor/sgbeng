@@ -1,185 +1,191 @@
 @import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto&display=swap');
+@import url('https://fonts.cdnfonts.com/css/poppins');
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #0a0a0a;
-  color: #eee;
-  overflow-x: hidden;
-}
-
+/* Base Banner Styles */
 .banner {
-  width: 100%;
-  height: 50vh; /* Reduced height for better compatibility */
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-  background: linear-gradient(to bottom right, #0a0a0a, #1f1f1f);
-  margin-bottom: 3rem; /* More consistent spacing */
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    background-color: #181A1B;
+    color: #E8E9EB;
 }
 
-.model {
-  background-image: url('https://singasavors.github.io/sgbeng/model.png');
-  width: 100%;
-  height: 60vh; /* Adjusted to align with banner */
-  position: absolute; /* Ensures stacking properly */
-  background-size: cover; /* Ensures full coverage */
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
+/* 3D Slider */
 .banner .slider {
-  position: absolute;
-  width: 150px;
-  height: 180px; /* Adjusted dimensions for better scaling */
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  transform-style: preserve-3d;
-  animation: autoRun 20s linear infinite;
-  z-index: 2;
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
 }
 
 @keyframes autoRun {
-  from {
-    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
-  }
-  to {
-    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
-  }
+    from {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+    to {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
 }
 
 .banner .slider .item {
-  position: absolute;
-  inset: 0;
-  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
+        translateZ(550px);
 }
 
 .banner .slider .item img {
-  width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.offers-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem; /* Consistent spacing */
-  padding: 2rem 0; /* Removed side padding to ensure full width */
-  width: 100%; /* Full width container */
-  background: black;
-  box-sizing: border-box; /* Includes padding in width calculation */
+/* Content Section */
+.banner .content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
 }
 
-.offer-card {
-  background-color: #b20000;
-  color: #eabb4c;
-  border: 1px solid #ff0000;
-  border-radius: 8px;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  text-decoration: none; /* Removes underline on links */
+/* Headline with Glow */
+.banner .content h1 {
+    font-family: 'ICA Rubrik';
+    font-size: 16em;
+    line-height: 1em;
+    color: #E8E9EB;
+    position: relative;
+    text-shadow: 0 0 5px #ff0055;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
 
-.offer-card:hover {
-  background-color: black;
-  color: #eabb4c;
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #eabb4c, 0 0 40px #ff4d4d;
+.banner .content h1::after {
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #3C3F41;
+    color: transparent;
 }
 
-.offer-details {
-  flex: 1; /* Ensures content scales uniformly */
-  padding: 0.5rem;
+/* Animated Glow Effect */
+@keyframes glowPulse {
+    0% {
+        text-shadow: 0 0 5px #ff0055, 0 0 10px #ff0055, 0 0 15px #ff0055;
+    }
+    50% {
+        text-shadow: 0 0 20px #ff3377, 0 0 30px #ff3377, 0 0 40px #ff3377;
+    }
+    100% {
+        text-shadow: 0 0 5px #ff0055, 0 0 10px #ff0055, 0 0 15px #ff0055;
+    }
 }
 
-.offer-title {
-  font-size: 1.2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #ff4d4d, #b20000, #eabb4c, #b20000, #ff4d4d);
-  background-size: 300%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shine 4s linear infinite;
-  margin-bottom: 0.5rem;
-  text-decoration: none; /* Removes underline */
+.banner .content h1:hover {
+    animation: glowPulse 1.5s infinite alternate;
 }
 
-.offer-description {
-  font-size: 1rem;
-  color: #eabb4c;
-  font-weight: 700;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-  text-decoration: none; /* Removes underline */
+/* Subtitle and Author */
+.banner .content h2,
+.banner .content .author {
+    font-family: Poppins;
+    transition: all 0.3s ease-in-out;
+    text-shadow: none;
+    color: #AAAAAA;
 }
 
-.offer-amount {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #eabb4c;
+.banner .content h2:hover,
+.banner .content .author:hover {
+    text-shadow: 0 0 5px #00faff, 0 0 10px #00faff;
 }
 
-.offer-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+/* Specific Author Section */
+.banner .content .author {
+    text-align: right;
+    max-width: 200px;
 }
 
-/* Gradient Shine Animation */
-@keyframes gradient-shine {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
-  }
+.banner .content h2 {
+    font-size: 3em;
 }
 
-/* FIX: Center slider more accurately */
-.banner .slider {
-  left: 50%;
-  transform: translateX(-50%) translateZ(0);
+/* Background Model Image */
+.banner .content .model {
+    background-image: url(https://singasavors.github.io/sgbeng/model.png);
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto 130%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 1;
 }
 
-/* FIX: Equalize rotation distance to balance perspective */
-.banner .slider .item {
-  transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity)))) translateZ(280px);
+/* Responsive Styles */
+@media screen and (max-width: 1023px) {
+    .banner .slider {
+        width: 160px;
+        height: 200px;
+        left: calc(50% - 80px);
+    }
+
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
+            translateZ(300px);
+    }
+
+    .banner .content h1 {
+        text-align: center;
+        width: 100%;
+        font-size: 7em;
+        text-shadow: 0 10px 20px #111;
+    }
+
+    .banner .content .author {
+        color: #CCCCCC;
+        padding: 0 30px;
+        text-align: center;
+        width: 100%;
+        max-width: unset;
+        z-index: 2;
+        text-shadow: 0 10px 20px #111;
+    }
 }
 
-/* FIX: Reduce space between banner and offers section */
-.banner {
-  margin-bottom: 1rem;
-}
+@media screen and (max-width: 767px) {
+    .banner .slider {
+        width: 100px;
+        height: 150px;
+        left: calc(50% - 50px);
+    }
 
-/* FIX: Add padding inside cards for better spacing */
-.offer-card {
-  padding: 1.5rem;
-}
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
+            translateZ(180px);
+    }
 
-/* FIX: Increase internal spacing in card details */
-.offer-details {
-  padding: 0.5rem 1rem;
-}
-
-/* FIX: Prevent text from hugging edges */
-.offer-title,
-.offer-description,
-.offer-amount {
-  padding-right: 0.5rem;
-}
-
-/* FIX: Prevent logo image from sticking to card edge */
-.offer-img {
-  margin-left: 1rem;
+    .banner .content h1 {
+        font-size: 5em;
+    }
 }
