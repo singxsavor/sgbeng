@@ -46,21 +46,6 @@
     object-fit: cover;
 }
 
-/* Content Section */
-.banner .content {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(1400px, 100vw);
-    padding-bottom: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
-}
-
 /* Chaotic Red Glow Animation */
 @keyframes chaoticGlow {
     0% {
@@ -80,57 +65,61 @@
     }
 }
 
-/* Title and Subtitle */
-.banner .content h1,
-.banner .content h2,
-.banner .content .author p,
-.banner .content .author a {
-    font-family: 'ICA Rubrik', sans-serif;
-    animation: chaoticGlow 2.5s infinite;
-    transition: text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
-    color: #E8E9EB;
+/* Content Section */
+.banner .content {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
 }
 
-/* Brighter Glow on Hover */
-.banner .content h1:hover,
-.banner .content h2:hover,
-.banner .content .author p:hover,
+/* Author Section */
+.banner .content .author {
+    text-align: center;
+    max-width: 100%;
+    font-family: Poppins, sans-serif;
+    z-index: 3;
+    position: relative;
+}
+
+/* HEIDUSHE Heading */
+.banner .content .author h2 {
+    font-family: 'ICA Rubrik', sans-serif;
+    font-size: 5em;
+    margin: 0;
+    animation: chaoticGlow 2.5s infinite;
+    color: #fff;
+    position: relative;
+    z-index: 3;
+}
+
+/* Subtitle and Call-to-Action Link */
+.banner .content .author p,
+.banner .content .author a {
+    font-size: 1.3em;
+    animation: chaoticGlow 2.5s infinite;
+    color: #ff4d4d;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    z-index: 3;
+}
+
 .banner .content .author a:hover {
+    color: #fff;
     text-shadow:
         0 0 10px #ff0000,
         0 0 20px #ff3333,
         0 0 30px #ff4d4d,
         0 0 40px #ff6666,
         0 0 60px #ff1a1a;
-    color: #fff;
-}
-
-.banner .content h1 {
-    font-size: 16em;
-    line-height: 1em;
-    position: relative;
-    cursor: pointer;
-}
-
-.banner .content h1::after {
-    content: attr(data-content);
-    position: absolute;
-    inset: 0;
-    color: transparent;
-    -webkit-text-stroke: 2px #3C3F41;
-    z-index: 2;
-}
-
-/* Subtitle and author block */
-.banner .content h2 {
-    font-size: 3em;
-    font-family: Poppins, sans-serif;
-}
-
-.banner .content .author {
-    text-align: right;
-    max-width: 200px;
-    font-family: Poppins, sans-serif;
 }
 
 /* Background Model Image */
@@ -159,17 +148,13 @@
         transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
     }
 
-    .banner .content h1 {
-        font-size: 7em;
-        width: 100%;
-        text-align: center;
+    .banner .content .author h2 {
+        font-size: 3.5em;
     }
 
-    .banner .content .author {
-        text-align: center;
-        padding: 0 30px;
-        max-width: unset;
-        width: 100%;
+    .banner .content .author p,
+    .banner .content .author a {
+        font-size: 1.1em;
     }
 }
 
@@ -184,7 +169,12 @@
         transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px);
     }
 
-    .banner .content h1 {
-        font-size: 5em;
+    .banner .content .author h2 {
+        font-size: 2.8em;
+    }
+
+    .banner .content .author p,
+    .banner .content .author a {
+        font-size: 1em;
     }
 }
