@@ -37,9 +37,7 @@
 .banner .slider .item {
     position: absolute;
     inset: 0 0 0 0;
-    transform: 
-        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
-        translateZ(550px);
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(550px);
 }
 
 .banner .slider .item img {
@@ -55,7 +53,6 @@
     left: 50%;
     transform: translateX(-50%);
     width: min(1400px, 100vw);
-    height: max-content;
     padding-bottom: 100px;
     display: flex;
     flex-wrap: wrap;
@@ -64,66 +61,76 @@
     z-index: 1;
 }
 
-/* Headline with Glow */
+/* Chaotic Red Glow Animation */
+@keyframes chaoticGlow {
+    0% {
+        text-shadow: 0 0 3px #ff1a1a, 0 0 6px #ff3333, 0 0 9px #ff4d4d, 0 0 12px #ff0000;
+    }
+    25% {
+        text-shadow: 0 0 6px #ff4d4d, 0 0 12px #ff1a1a, 0 0 18px #ff0000, 0 0 24px #ff3333;
+    }
+    50% {
+        text-shadow: 0 0 4px #ff0000, 0 0 10px #ff1a1a, 0 0 16px #ff4d4d, 0 0 22px #ff6666;
+    }
+    75% {
+        text-shadow: 0 0 8px #ff3333, 0 0 14px #ff0000, 0 0 20px #ff1a1a, 0 0 26px #ff4d4d;
+    }
+    100% {
+        text-shadow: 0 0 3px #ff1a1a, 0 0 6px #ff3333, 0 0 9px #ff4d4d, 0 0 12px #ff0000;
+    }
+}
+
+/* Title and Subtitle */
+.banner .content h1,
+.banner .content h2,
+.banner .content .author p,
+.banner .content .author a {
+    font-family: 'ICA Rubrik', sans-serif;
+    animation: chaoticGlow 2.5s infinite;
+    transition: text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+    color: #E8E9EB;
+}
+
+/* Brighter Glow on Hover */
+.banner .content h1:hover,
+.banner .content h2:hover,
+.banner .content .author p:hover,
+.banner .content .author a:hover {
+    text-shadow:
+        0 0 10px #ff0000,
+        0 0 20px #ff3333,
+        0 0 30px #ff4d4d,
+        0 0 40px #ff6666,
+        0 0 60px #ff1a1a;
+    color: #fff;
+}
+
 .banner .content h1 {
-    font-family: 'ICA Rubrik';
     font-size: 16em;
     line-height: 1em;
-    color: #E8E9EB;
     position: relative;
-    text-shadow: 0 0 5px #ff0055;
-    transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
 .banner .content h1::after {
-    position: absolute;
-    inset: 0 0 0 0;
     content: attr(data-content);
-    z-index: 2;
-    -webkit-text-stroke: 2px #3C3F41;
+    position: absolute;
+    inset: 0;
     color: transparent;
+    -webkit-text-stroke: 2px #3C3F41;
+    z-index: 2;
 }
 
-/* Animated Glow Effect */
-@keyframes glowPulse {
-    0% {
-        text-shadow: 0 0 5px #ff0055, 0 0 10px #ff0055, 0 0 15px #ff0055;
-    }
-    50% {
-        text-shadow: 0 0 20px #ff3377, 0 0 30px #ff3377, 0 0 40px #ff3377;
-    }
-    100% {
-        text-shadow: 0 0 5px #ff0055, 0 0 10px #ff0055, 0 0 15px #ff0055;
-    }
+/* Subtitle and author block */
+.banner .content h2 {
+    font-size: 3em;
+    font-family: Poppins, sans-serif;
 }
 
-.banner .content h1:hover {
-    animation: glowPulse 1.5s infinite alternate;
-}
-
-/* Subtitle and Author */
-.banner .content h2,
-.banner .content .author {
-    font-family: Poppins;
-    transition: all 0.3s ease-in-out;
-    text-shadow: none;
-    color: #AAAAAA;
-}
-
-.banner .content h2:hover,
-.banner .content .author:hover {
-    text-shadow: 0 0 5px #00faff, 0 0 10px #00faff;
-}
-
-/* Specific Author Section */
 .banner .content .author {
     text-align: right;
     max-width: 200px;
-}
-
-.banner .content h2 {
-    font-size: 3em;
+    font-family: Poppins, sans-serif;
 }
 
 /* Background Model Image */
@@ -140,7 +147,7 @@
     z-index: 1;
 }
 
-/* Responsive Styles */
+/* Responsive Adjustments */
 @media screen and (max-width: 1023px) {
     .banner .slider {
         width: 160px;
@@ -149,26 +156,20 @@
     }
 
     .banner .slider .item {
-        transform: 
-            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
-            translateZ(300px);
+        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
     }
 
     .banner .content h1 {
-        text-align: center;
-        width: 100%;
         font-size: 7em;
-        text-shadow: 0 10px 20px #111;
+        width: 100%;
+        text-align: center;
     }
 
     .banner .content .author {
-        color: #CCCCCC;
-        padding: 0 30px;
         text-align: center;
-        width: 100%;
+        padding: 0 30px;
         max-width: unset;
-        z-index: 2;
-        text-shadow: 0 10px 20px #111;
+        width: 100%;
     }
 }
 
@@ -180,9 +181,7 @@
     }
 
     .banner .slider .item {
-        transform: 
-            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
-            translateZ(180px);
+        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px);
     }
 
     .banner .content h1 {
